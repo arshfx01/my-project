@@ -1,0 +1,91 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Setup/Tailus UI with Next.js" />
+
+# Setting Up Tailus UI in Next.js
+
+> **Note:** Tailus Themer works only with Tailwind CSS v3. It is not compatible with Tailwind CSS v4.
+
+This guide will help you set up Tailus UI in a Next.js project.
+
+---
+
+## Prerequisites
+- Node.js (v16.8 or later)
+- npm or yarn
+- A Next.js project (with or without Tailwind CSS)
+
+---
+
+## 1. Install Tailwind CSS (if not already installed)
+
+Follow the [Tailwind CSS installation guide](https://tailwindcss.com/docs/installation) or run:
+
+```bash
+npm install -D tailwindcss@3 postcss autoprefixer
+npx tailwindcss init -p
+```
+
+---
+
+## 2. Install Tailus Themer
+
+```bash
+npm install tailus-themer
+```
+
+---
+
+## 3. Copy Required Files from Tailus Themer
+
+- Copy `lib/utils.ts` from `node_modules/tailus-themer/lib` to your project's `lib` folder.
+- Copy `tailwind.config.js` from `node_modules/tailus-themer` to your project root and rename it to `tailwind.config.ts`.
+
+---
+
+## 4. Copy Tailus UI Components
+
+Copy the `components` folder from `node_modules/tailus-themer` into your project's `components` directory.
+
+---
+
+## 5. Configure Tailwind in your global CSS
+
+In your `globals.css` (or equivalent), add:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+Import this CSS in your `_app.tsx` (for Next.js):
+
+```ts
+import '../src/app/globals.css'; // Adjust path as needed
+```
+
+---
+
+## 6. Use Tailus UI Components
+
+You can now import and use Tailus UI components in your Next.js application, for example:
+
+```tsx
+import Button from '../components/Button';
+
+export default function Home() {
+  return (
+    <Button.Root intent="primary">
+      <Button.Label>Click Me</Button.Label>
+    </Button.Root>
+  );
+}
+```
+
+---
+
+## Troubleshooting
+- If you see unstyled components, double-check your global CSS import in `_app.tsx`.
+- If you get module errors, ensure all files are copied and paths are correct.
+- For more, see the [Tailus Themer documentation](https://www.npmjs.com/package/tailus-themer). 
